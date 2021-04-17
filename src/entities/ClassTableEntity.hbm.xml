@@ -1,11 +1,16 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="entities.ClassTableEntity" table="class_table" schema="studentorm">
         <id name="classNo" column="classNo"/>
         <property name="className" column="className"/>
+
+        <set name="students" inverse="true" cascade="all" lazy="false" fetch="join">
+            <key column="classNo"/>
+            <one-to-many class="entities.StudentTableEntity"/>
+        </set>
     </class>
 </hibernate-mapping>

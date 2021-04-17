@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="studentorm@localhost">
+<dataSource name="hibernate.cfg.xml/Hibernate">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.21">
     <root id="1">
       <ServerVersion>5.7.33</ServerVersion>
@@ -50,7 +50,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     </schema>
     <schema id="5" parent="1" name="studentorm">
       <Current>1</Current>
-      <Collation>utf8_general_ci</Collation>
+      <Collation>gbk_chinese_ci</Collation>
     </schema>
     <schema id="6" parent="1" name="sys">
       <Collation>utf8_general_ci</Collation>
@@ -771,18 +771,10 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <user id="231" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <table id="232" parent="5" name="class_table">
-      <Collation>gbk_chinese_ci</Collation>
-    </table>
-    <table id="233" parent="5" name="course_table">
-      <Collation>gbk_chinese_ci</Collation>
-    </table>
-    <table id="234" parent="5" name="score_table">
-      <Collation>gbk_chinese_ci</Collation>
-    </table>
-    <table id="235" parent="5" name="student_table">
-      <Collation>gbk_chinese_ci</Collation>
-    </table>
+    <table id="232" parent="5" name="class_table"/>
+    <table id="233" parent="5" name="course_table"/>
+    <table id="234" parent="5" name="score_table"/>
+    <table id="235" parent="5" name="student_table"/>
     <column id="236" parent="232" name="classNo">
       <Position>1</Position>
       <DataType>varchar(5)|0s</DataType>
@@ -877,5 +869,10 @@ courseNo</ColNames>
       <ColNames>studentID</ColNames>
       <Primary>1</Primary>
     </key>
+    <foreign-key id="255" parent="235" name="classNo">
+      <ColNames>classNo</ColNames>
+      <RefTableName>class_table</RefTableName>
+      <RefColNames>classNo</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>

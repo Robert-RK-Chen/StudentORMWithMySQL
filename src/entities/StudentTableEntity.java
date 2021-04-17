@@ -3,6 +3,7 @@ package entities;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Robert Chen
@@ -16,6 +17,29 @@ public class StudentTableEntity
     private String studentName;
     private String gender;
     private Date birthday;
+    private Set<CourseTableEntity> courses;
+    private ClassTableEntity studentClass;
+
+    public ClassTableEntity getStudentClass()
+    {
+        return studentClass;
+    }
+
+    public void setStudentClass(ClassTableEntity studentClass)
+    {
+        this.studentClass = studentClass;
+    }
+
+    public Set<CourseTableEntity> getCourses()
+    {
+        return courses;
+    }
+
+    public void setCourses(Set<CourseTableEntity> courses)
+    {
+        this.courses = courses;
+    }
+
 
     @Id
     @Column(name = "studentID")
@@ -84,5 +108,11 @@ public class StudentTableEntity
     public int hashCode()
     {
         return Objects.hash(studentId, studentName, gender, birthday);
+    }
+
+    @Override
+    public String toString()
+    {
+        return studentId + ' ' + studentName + ' '+ gender + ' ' + birthday + ' ' + studentClass.getClassNo();
     }
 }

@@ -86,9 +86,7 @@ CREATE TABLE `student_table`  (
   `gender` varchar(6) CHARACTER SET gbk COLLATE gbk_chinese_ci NOT NULL,
   `birthday` date NOT NULL,
   `classNo` varchar(5) CHARACTER SET gbk COLLATE gbk_chinese_ci NOT NULL,
-  PRIMARY KEY (`studentID`) USING BTREE,
-  INDEX `classNo`(`classNo`) USING BTREE,
-  CONSTRAINT `classNo` FOREIGN KEY (`classNo`) REFERENCES `class_table` (`classNo`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  PRIMARY KEY (`studentID`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = gbk COLLATE = gbk_chinese_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------

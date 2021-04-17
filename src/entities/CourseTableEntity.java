@@ -2,6 +2,7 @@ package entities;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author Robert Chen
@@ -15,6 +16,17 @@ public class CourseTableEntity
     private String courseName;
     private int courseTime;
     private int courseCredit;
+    private Set<StudentTableEntity> students;
+
+    public Set<StudentTableEntity> getStudents()
+    {
+        return students;
+    }
+
+    public void setStudents(Set<StudentTableEntity> students)
+    {
+        this.students = students;
+    }
 
     @Id
     @Column(name = "courseNo")
