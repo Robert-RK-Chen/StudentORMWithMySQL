@@ -184,13 +184,14 @@ public class Client
         findStudentInCourse();
 
         // 查询某位学生选的所有课（验证多对多）
+        getCourseOfStudent();
+
+        // 查询某位学生选的所有课的所有成绩（验证连接）
         getCourseScoreOfStudent();
         
         /*
           增删改查已完成：增、查
           @// TODO: 2021-04-17 完成删除、更新操作
         */
-
-        getCourseOfStudent();
     }
 }
