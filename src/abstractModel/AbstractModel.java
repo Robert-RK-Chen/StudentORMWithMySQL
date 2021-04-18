@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * @author Robert Chen
- * @date 2021-04-17
+ * @date 2021-04-18
  */
 public abstract class AbstractModel<T>
 {
@@ -91,14 +91,14 @@ public abstract class AbstractModel<T>
     }
 
     /**
-     * 查询数据库中班级信息
+     * 查询数据库中信息
      *
      * @param id : 用于查找信息的 id
      * @return T : 查找后返回的实体
      */
     public T findById(Object id)
     {
-        T result;
+        T result = null;
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession())
         {
@@ -108,9 +108,9 @@ public abstract class AbstractModel<T>
         }
         catch (Exception e)
         {
-            result = null;
             if (transaction != null)
             {
+                // e.printStackTrace();
                 transaction.rollback();
             }
         }
@@ -134,7 +134,6 @@ public abstract class AbstractModel<T>
         }
         catch (Exception e)
         {
-            result = null;
             if (transaction != null)
             {
                 transaction.rollback();

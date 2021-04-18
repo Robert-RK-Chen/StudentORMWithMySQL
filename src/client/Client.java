@@ -1,9 +1,6 @@
 package client;
 
-import entities.ClassTableEntity;
-import entities.CourseTableEntity;
-import entities.ScoreTableEntity;
-import entities.StudentTableEntity;
+import entities.*;
 import model.ClassModel;
 import model.CourseModel;
 import model.ScoreModel;
@@ -112,33 +109,18 @@ public class Client
         }
     }
 
-    /**
-     * @ TODO: 2021-04-17 该功能暂时存在问题
-     */
     public static void getCourseScoreOfStudent()
     {
         Scanner scanner = new Scanner(System.in);
-        StudentModel studentModel = new StudentModel();
         ScoreModel scoreModel = new ScoreModel();
+        ScoreTableEntity scoreTableEntity = new ScoreTableEntity();
 
-        System.out.print("\n你想查询哪位学生的全部成绩：");
+        System.out.print("\n请输入你想查询成绩的学生学号：");
         String studentId = scanner.next();
-        StudentTableEntity student = studentModel.findById(studentId);
-        Set<CourseTableEntity> courses = student.getCourses();
-        Set<ScoreTableEntity> scores = null;
-        if (courses.isEmpty())
-        {
-            System.out.println("这位学生还没有选课！");
-        }
-        else
-        {
-            for (CourseTableEntity temp : courses)
-            {
-                String courseNo = temp.getCourseNo();
-                scores.add(scoreModel.findById(courseNo));
-            }
-            System.out.println(student.getStudentName() + " 的全部成绩：\n" + scores);
-        }
+        scoreTableEntity.setStudentId(studentId);
+        scoreTableEntity.setCourseNo("C1101");
+        scoreTableEntity = scoreModel.findById(scoreTableEntity);
+        System.out.println(scoreTableEntity.getScore());
     }
 
     public static void getCourseOfStudent()
@@ -177,7 +159,7 @@ public class Client
         System.out.println("\n学生表（新）：");
         findAllStudent();
 
-        // 查询某一班级的全部学生（验证一对多
+        // 查询某一班级的全部学生（验证一对多)
         findStudentInClass();
 
         // 查询某门课的全部学生（验证多对多）
