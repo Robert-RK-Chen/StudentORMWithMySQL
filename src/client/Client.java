@@ -161,12 +161,12 @@ public class Client
 
     public static void deleteStudent()
     {
-        Scanner scanner = new Scanner(System.in);
+//        Scanner scanner = new Scanner(System.in);
         StudentModel studentModel = new StudentModel();
 
-        System.out.print("\n请输入你想删除学生的学号：");
-        String studentId = scanner.next();
-        StudentTableEntity ste = studentModel.findById("201401004");
+//        System.out.print("\n请输入你想删除学生的学号：");
+//        String studentId = scanner.next();
+        StudentTableEntity ste = studentModel.findById("201401001");
         if (ste == null)
         {
             System.out.println("数据库中没有该学生的信息！");
@@ -174,7 +174,7 @@ public class Client
         else
         {
             studentModel.delete(ste);
-            System.out.println("已删除 " + studentId + ", " + ste.getStudentName());
+//            System.out.println("已删除 " + studentId + ", " + ste.getStudentName());
         }
     }
 
@@ -203,31 +203,31 @@ public class Client
 
     public static void main(String[] args)
     {
-        // 显示原数据库中的学生信息
-        System.out.println("学生表（原）：");
-        findAllStudent();
-
-        // 增加一条学生信息
-        insertStudent();
-
-        // 显示插入数据后数据库中的学生信息
-        System.out.println("\n学生表（新）：");
-        findAllStudent();
-
-        // 查询某一班级的全部学生（验证一对多)
-        findStudentInClass();
-
-        // 查询某门课的全部学生（验证多对多）
-        findStudentInCourse();
-
-        // 查询某位学生选的所有课（验证多对多）
-        getCourseOfStudent();
-
-        // 查询某位学生选的所有课的所有成绩（验证连接）
-        getCourseScoreOfStudent();
-
-        // 更新某位学生的信息（验证改）
-        updateStudent();
+//        // 显示原数据库中的学生信息
+//        System.out.println("学生表（原）：");
+//        findAllStudent();
+//
+//        // 增加一条学生信息
+//        insertStudent();
+//
+//        // 显示插入数据后数据库中的学生信息
+//        System.out.println("\n学生表（新）：");
+//        findAllStudent();
+//
+//        // 查询某一班级的全部学生（验证一对多)
+//        findStudentInClass();
+//
+//        // 查询某门课的全部学生（验证多对多）
+//        findStudentInCourse();
+//
+//        // 查询某位学生选的所有课（验证多对多）
+//        getCourseOfStudent();
+//
+//        // 查询某位学生选的所有课的所有成绩（验证连接）
+//        getCourseScoreOfStudent();
+//
+//        // 更新某位学生的信息（验证改）
+//        updateStudent();
 
         // 删除某位学生的信息（验证删除）
         deleteStudent();

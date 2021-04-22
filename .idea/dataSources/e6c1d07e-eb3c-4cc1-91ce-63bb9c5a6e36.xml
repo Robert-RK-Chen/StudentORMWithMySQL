@@ -868,11 +868,7 @@ courseNo</ColNames>
       <DataType>varchar(5)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="253" parent="235" name="classNo">
-      <ColNames>classNo</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="254" parent="235" name="PRIMARY">
+    <key id="253" parent="235" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>studentID</ColNames>
       <Primary>1</Primary>
