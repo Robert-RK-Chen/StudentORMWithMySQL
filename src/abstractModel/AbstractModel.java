@@ -37,6 +37,7 @@ public abstract class AbstractModel<T>
         }
         catch (Exception e)
         {
+            e.printStackTrace();
             if (transaction != null)
             {
                 transaction.rollback();
@@ -84,6 +85,7 @@ public abstract class AbstractModel<T>
         }
         catch (Exception e)
         {
+            e.printStackTrace();
             if (transaction != null)
             {
                 transaction.rollback();
@@ -109,6 +111,7 @@ public abstract class AbstractModel<T>
         }
         catch (Exception e)
         {
+            e.printStackTrace();
             if (transaction != null)
             {
                 transaction.rollback();
@@ -134,6 +137,7 @@ public abstract class AbstractModel<T>
         }
         catch (Exception e)
         {
+            e.printStackTrace();
             if (transaction != null)
             {
                 transaction.rollback();

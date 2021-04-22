@@ -19,6 +19,28 @@ public class ScoreTableEntity implements Serializable
     private Integer score;
     @Serial
     private static final long serialVersionUID = 1L;
+    private StudentTableEntity students;
+    private CourseTableEntity courses;
+
+    public CourseTableEntity getCourses()
+    {
+        return courses;
+    }
+
+    public void setCourses(CourseTableEntity courses)
+    {
+        this.courses = courses;
+    }
+
+    public StudentTableEntity getStudents()
+    {
+        return students;
+    }
+
+    public void setStudents(StudentTableEntity students)
+    {
+        this.students = students;
+    }
 
     @Id
     @Column(name = "studentID")

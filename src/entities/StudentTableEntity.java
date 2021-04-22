@@ -17,8 +17,18 @@ public class StudentTableEntity
     private String studentName;
     private String gender;
     private Date birthday;
-    private Set<CourseTableEntity> courses;
     private ClassTableEntity studentClass;
+    private Set<ScoreTableEntity> scores;
+
+    public Set<ScoreTableEntity> getScores()
+    {
+        return scores;
+    }
+
+    public void setScores(Set<ScoreTableEntity> scores)
+    {
+        this.scores = scores;
+    }
 
     public ClassTableEntity getStudentClass()
     {
@@ -29,17 +39,6 @@ public class StudentTableEntity
     {
         this.studentClass = studentClass;
     }
-
-    public Set<CourseTableEntity> getCourses()
-    {
-        return courses;
-    }
-
-    public void setCourses(Set<CourseTableEntity> courses)
-    {
-        this.courses = courses;
-    }
-
 
     @Id
     @Column(name = "studentID")

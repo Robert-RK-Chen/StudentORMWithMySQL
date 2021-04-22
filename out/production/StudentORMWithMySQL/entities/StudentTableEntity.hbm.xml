@@ -9,12 +9,11 @@
         <property name="gender" column="gender"/>
         <property name="birthday" column="birthday"/>
 
-        <many-to-one name="studentClass" class="entities.ClassTableEntity" column="classNo" cascade="save-update"
-                     lazy="false" fetch="join"/>
+        <many-to-one name="studentClass" class="entities.ClassTableEntity" column="classNo" cascade="save-update"/>
 
-        <set name="courses" inverse="true" cascade="all" table="score_table" lazy="false" fetch="join">
+        <set name="scores" inverse="true" cascade="all" lazy="false" fetch="join">
             <key column="studentID"/>
-            <many-to-many class="entities.CourseTableEntity" column="courseNo"/>
+            <one-to-many class="entities.ScoreTableEntity"/>
         </set>
     </class>
 </hibernate-mapping>

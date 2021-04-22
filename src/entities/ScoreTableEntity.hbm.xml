@@ -10,5 +10,8 @@
             <key-property name="courseNo" column="courseNo"/>
         </composite-id>
         <property name="score" column="score"/>
+
+        <many-to-one name="students" class="entities.StudentTableEntity" column="studentID" cascade="save-update" insert="false" update="false"/>
+        <many-to-one name="courses" class="entities.CourseTableEntity" column="courseNo" cascade="save-update" insert="false" update="false"/>
     </class>
 </hibernate-mapping>

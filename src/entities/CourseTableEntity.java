@@ -16,16 +16,16 @@ public class CourseTableEntity
     private String courseName;
     private int courseTime;
     private int courseCredit;
-    private Set<StudentTableEntity> students;
+    private Set<ScoreTableEntity> scores;
 
-    public Set<StudentTableEntity> getStudents()
+    public Set<ScoreTableEntity> getScores()
     {
-        return students;
+        return scores;
     }
 
-    public void setStudents(Set<StudentTableEntity> students)
+    public void setScores(Set<ScoreTableEntity> scores)
     {
-        this.students = students;
+        this.scores = scores;
     }
 
     @Id

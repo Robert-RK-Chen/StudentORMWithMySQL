@@ -93,22 +93,46 @@ public class Client
     {
         Scanner scanner = new Scanner(System.in);
         CourseModel courseModel = new CourseModel();
+        StudentModel studentModel = new StudentModel();
 
         System.out.print("\n你想查询哪一门课的全部学生：");
         String courseNo = scanner.next();
-
         CourseTableEntity courseTe = courseModel.findById(courseNo);
-        Set<StudentTableEntity> studentsInCourse = courseTe.getStudents();
-        if (studentsInCourse.isEmpty())
+        Set<ScoreTableEntity> scoreTe = courseTe.getScores();
+        if (scoreTe.isEmpty())
         {
             System.out.println("这门课暂时没有学生选修。");
         }
         else
         {
             System.out.println("选修了 " + courseTe.getCourseName() + " 的全部学生：");
-            for (StudentTableEntity temp : studentsInCourse)
+            for (ScoreTableEntity temp : scoreTe)
             {
-                System.out.println(temp.getStudentName());
+                System.out.println(studentModel.findById(temp.getStudentId()).getStudentName());
+            }
+        }
+    }
+
+    public static void getCourseOfStudent()
+    {
+        Scanner scanner = new Scanner(System.in);
+        StudentModel studentModel = new StudentModel();
+        CourseModel courseModel = new CourseModel();
+
+        System.out.print("\n你想查询哪位学生的全部课程：");
+        String studentId = scanner.next();
+        StudentTableEntity student = studentModel.findById(studentId);
+        Set<ScoreTableEntity> scoreTe = student.getScores();
+        if (scoreTe.isEmpty())
+        {
+            System.out.println("这位学生还没有选课！");
+        }
+        else
+        {
+            System.out.println(student.getStudentName() + "选修了以下课程：");
+            for (ScoreTableEntity temp : scoreTe)
+            {
+                System.out.println(courseModel.findById(temp.getCourseNo()).getCourseName());
             }
         }
     }
@@ -122,7 +146,7 @@ public class Client
         System.out.print("\n请输入你想查询成绩的学生学号：");
         String studentId = scanner.next();
         scoreTableEntity.setStudentId(studentId);
-        System.out.print("\n请输入课程编号：");
+        System.out.print("请输入课程编号：");
         String courseId = scanner.next();
         scoreTableEntity.setCourseNo(courseId);
         scoreTableEntity = scoreModel.findById(scoreTableEntity);
@@ -133,48 +157,6 @@ public class Client
         else
         {
             System.out.println(studentId + ": " + scoreTableEntity.getCourseNo() + ", " + scoreTableEntity.getScore());
-        }
-    }
-
-    public static void getCourseOfStudent()
-    {
-        Scanner scanner = new Scanner(System.in);
-        StudentModel studentModel = new StudentModel();
-
-        System.out.print("\n你想查询哪位学生的全部课程：");
-        String studentId = scanner.next();
-        StudentTableEntity student = studentModel.findById(studentId);
-        Set<CourseTableEntity> courses = student.getCourses();
-        if (courses.isEmpty())
-        {
-            System.out.println("这位学生还没有选课！");
-        }
-        else
-        {
-            System.out.println(student.getStudentName() + "选修了以下课程：");
-            for (CourseTableEntity temp : courses)
-            {
-                System.out.println(temp.getCourseName());
-            }
-        }
-    }
-
-    public static void deleteStudent()
-    {
-//        Scanner scanner = new Scanner(System.in);
-        StudentModel studentModel = new StudentModel();
-
-//        System.out.print("\n请输入你想删除学生的学号：");
-//        String studentId = scanner.next();
-        StudentTableEntity ste = studentModel.findById("201401001");
-        if (ste == null)
-        {
-            System.out.println("数据库中没有该学生的信息！");
-        }
-        else
-        {
-            studentModel.delete(ste);
-//            System.out.println("已删除 " + studentId + ", " + ste.getStudentName());
         }
     }
 
@@ -201,33 +183,52 @@ public class Client
         }
     }
 
+    public static void deleteStudent()
+    {
+        Scanner scanner = new Scanner(System.in);
+        StudentModel studentModel = new StudentModel();
+
+        System.out.print("\n请输入你想删除学生的学号：");
+        String studentId = scanner.next();
+        StudentTableEntity ste = studentModel.findById(studentId);
+        if (ste == null)
+        {
+            System.out.println("数据库中没有该学生的信息！");
+        }
+        else
+        {
+            studentModel.delete(ste);
+            System.out.println("已删除 " + studentId + ", " + ste.getStudentName());
+        }
+    }
+
     public static void main(String[] args)
     {
-//        // 显示原数据库中的学生信息
-//        System.out.println("学生表（原）：");
-//        findAllStudent();
+        // 显示原数据库中的学生信息
+        System.out.println("学生表（原）：");
+        findAllStudent();
+
+        // 增加一条学生信息
+        insertStudent();
+
+        // 显示插入数据后数据库中的学生信息
+        System.out.println("\n学生表（新）：");
+        findAllStudent();
+
+        // 查询某一班级的全部学生（验证一对多)
+        findStudentInClass();
+
+        // 查询某门课的全部学生（验证多对多）
+        findStudentInCourse();
 //
-//        // 增加一条学生信息
-//        insertStudent();
-//
-//        // 显示插入数据后数据库中的学生信息
-//        System.out.println("\n学生表（新）：");
-//        findAllStudent();
-//
-//        // 查询某一班级的全部学生（验证一对多)
-//        findStudentInClass();
-//
-//        // 查询某门课的全部学生（验证多对多）
-//        findStudentInCourse();
-//
-//        // 查询某位学生选的所有课（验证多对多）
-//        getCourseOfStudent();
-//
-//        // 查询某位学生选的所有课的所有成绩（验证连接）
-//        getCourseScoreOfStudent();
-//
-//        // 更新某位学生的信息（验证改）
-//        updateStudent();
+        // 查询某位学生选的所有课（验证多对多）
+        getCourseOfStudent();
+
+        // 查询某位学生选的所有课的所有成绩（验证连接）
+        getCourseScoreOfStudent();
+
+        // 更新某位学生的信息（验证改）
+        updateStudent();
 
         // 删除某位学生的信息（验证删除）
         deleteStudent();
