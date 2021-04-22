@@ -8,7 +8,7 @@
       <jdbc-url>jdbc:mysql://localhost:3306/studentorm</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <driver-properties>
-        <property name="serverTimezone" value="UTC" />
+        <property name="serverTimezone" value="Asia/Shanghai" />
       </driver-properties>
     </data-source>
     <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="9a03625c-2cf4-4de6-b7d5-cb24f362ac98">

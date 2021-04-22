@@ -1,6 +1,9 @@
 package client;
 
-import entities.*;
+import entities.ClassTableEntity;
+import entities.CourseTableEntity;
+import entities.ScoreTableEntity;
+import entities.StudentTableEntity;
 import model.ClassModel;
 import model.CourseModel;
 import model.ScoreModel;
@@ -14,6 +17,7 @@ import java.util.Set;
 /**
  * @author Robert Chen
  * @date 2021-04-17
+ * @ TODO: 2021-04-19 修改Client使其适应所有Model而非单一学生
  */
 public class Client
 {
@@ -118,9 +122,18 @@ public class Client
         System.out.print("\n请输入你想查询成绩的学生学号：");
         String studentId = scanner.next();
         scoreTableEntity.setStudentId(studentId);
-        scoreTableEntity.setCourseNo("C1101");
+        System.out.print("\n请输入课程编号：");
+        String courseId = scanner.next();
+        scoreTableEntity.setCourseNo(courseId);
         scoreTableEntity = scoreModel.findById(scoreTableEntity);
-        System.out.println(scoreTableEntity.getScore());
+        if (scoreTableEntity == null)
+        {
+            System.out.println("该学生没有选修这门课！");
+        }
+        else
+        {
+            System.out.println(studentId + ": " + scoreTableEntity.getCourseNo() + ", " + scoreTableEntity.getScore());
+        }
     }
 
     public static void getCourseOfStudent()
@@ -143,6 +156,48 @@ public class Client
             {
                 System.out.println(temp.getCourseName());
             }
+        }
+    }
+
+    public static void deleteStudent()
+    {
+        Scanner scanner = new Scanner(System.in);
+        StudentModel studentModel = new StudentModel();
+
+        System.out.print("\n请输入你想删除学生的学号：");
+        String studentId = scanner.next();
+        StudentTableEntity ste = studentModel.findById("201401004");
+        if (ste == null)
+        {
+            System.out.println("数据库中没有该学生的信息！");
+        }
+        else
+        {
+            studentModel.delete(ste);
+            System.out.println("已删除 " + studentId + ", " + ste.getStudentName());
+        }
+    }
+
+    public static void updateStudent()
+    {
+        Scanner scanner = new Scanner(System.in);
+        StudentModel studentModel = new StudentModel();
+
+        System.out.print("\n你想修改哪位学生的信息：");
+        String studentId = scanner.next();
+        StudentTableEntity ste = studentModel.findById(studentId);
+        if (ste == null)
+        {
+            System.out.println("数据库中没有该学生的信息！");
+        }
+        else
+        {
+            // 例如修改姓名
+            System.out.print("请输入新的学生姓名：");
+            String information = scanner.next();
+            ste.setStudentName(information);
+            studentModel.update(ste);
+            System.out.println("更新学生姓名成功！");
         }
     }
 
@@ -170,10 +225,13 @@ public class Client
 
         // 查询某位学生选的所有课的所有成绩（验证连接）
         getCourseScoreOfStudent();
-        
-        /*
-          增删改查已完成：增、查
-          @// TODO: 2021-04-17 完成删除、更新操作
-        */
+
+        // 更新某位学生的信息（验证改）
+        updateStudent();
+
+        // 删除某位学生的信息（验证删除）
+        deleteStudent();
+
+        findAllStudent();
     }
 }

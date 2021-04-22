@@ -47,9 +47,9 @@ public abstract class AbstractModel<T>
     /**
      * 删除数据中信息
      *
-     * @param id : 删除数据库中的实体的 id
+     * @param entity : 删除数据库中的实体
      */
-    public void delete(Object id)
+    public void delete(T entity)
     {
         Transaction transaction = null;
         try (Session session = sessionFactory.openSession())
@@ -60,6 +60,7 @@ public abstract class AbstractModel<T>
         }
         catch (Exception e)
         {
+            e.printStackTrace();
             if (transaction != null)
             {
                 transaction.rollback();
@@ -110,7 +111,6 @@ public abstract class AbstractModel<T>
         {
             if (transaction != null)
             {
-                // e.printStackTrace();
                 transaction.rollback();
             }
         }
