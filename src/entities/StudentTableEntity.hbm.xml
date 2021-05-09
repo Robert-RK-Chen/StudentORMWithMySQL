@@ -8,9 +8,7 @@
         <property name="studentName" column="studentName"/>
         <property name="gender" column="gender"/>
         <property name="birthday" column="birthday"/>
-
         <many-to-one name="studentClass" class="entities.ClassTableEntity" column="classNo" cascade="save-update"/>
-
         <set name="scores" inverse="true" cascade="all" lazy="false" fetch="join">
             <key column="studentID"/>
             <one-to-many class="entities.ScoreTableEntity"/>
